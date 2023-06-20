@@ -16,7 +16,7 @@ struct ButtonView: View {
     var body: some View {
         Button(action: action) {
             Text(title)
-                .font(.title2)
+                .font(.title3)
                 .foregroundColor(.cyan)
         }
     }

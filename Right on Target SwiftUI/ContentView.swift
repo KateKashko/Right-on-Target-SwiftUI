@@ -9,19 +9,17 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @StateObject private var logic = ScoreCounter()
+    @StateObject private var scoreCounter = ScoreCounter()
     @State private var isPresented = false
     
     var body: some View {
         VStack {
-            Text("Подвиньте слайдер, как можно ближе к: \(logic.targetValue)")
-                .font(.title2)
-                .multilineTextAlignment(.center)
-                .padding(20)
+            Text("Подвиньте слайдер, как можно ближе к: \(scoreCounter.targetValue)")
+            
             HStack {
                 Text("0")
                     .font(.title2)
-                SliderView(value: $logic.currentValue, opacity: logic.opacity)
+                SliderView(value: $scoreCounter.currentValue, opacity: scoreCounter.opacity)
                 Text("100")
                     .font(.title2)
             }
@@ -31,17 +29,19 @@ struct ContentView: View {
                 title: "Проверь меня!",
                 color: .cyan,
                 action: {isPresented.toggle()})
-            .alert("Your score", isPresented: $isPresented, actions: {}) {
-                Text("\(logic.computeScore())")
-            }
+            .alert(
+                "Your score",
+                isPresented: $isPresented,
+                actions: {}) {
+                    Text("\(scoreCounter.computeScore())")
+                }
             .padding(20)
 
             ButtonView(
                 title: "Начать заново",
                 color: .cyan,
-                action: logic.reset)
+                action: scoreCounter.reset)
         }
-        .padding(20)
     }
 }
 

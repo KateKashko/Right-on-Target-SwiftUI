@@ -8,14 +8,40 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @StateObject private var logic = ScoreCounter()
+    @State private var isPresented = false
+    
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+            Text("Подвиньте слайдер, как можно ближе к: \(logic.targetValue)")
+                .font(.title2)
+                .multilineTextAlignment(.center)
+                .padding(20)
+            HStack {
+                Text("0")
+                    .font(.title2)
+                SliderView(value: $logic.currentValue, opacity: logic.opacity)
+                Text("100")
+                    .font(.title2)
+            }
+            .padding(20)
+
+            ButtonView(
+                title: "Проверь меня!",
+                color: .cyan,
+                action: {isPresented.toggle()})
+            .alert("Your score", isPresented: $isPresented, actions: {}) {
+                Text("\(logic.computeScore())")
+            }
+            .padding(20)
+
+            ButtonView(
+                title: "Начать заново",
+                color: .cyan,
+                action: logic.reset)
         }
-        .padding()
+        .padding(20)
     }
 }
 

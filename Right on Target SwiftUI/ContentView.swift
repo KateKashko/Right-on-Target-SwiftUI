@@ -26,7 +26,7 @@ struct ContentView: View {
             .padding(20)
 
             ButtonView(
-                title: "Проверь меня!",
+                title: "Проверить",
                 color: .cyan,
                 action: {isPresented.toggle()})
             .alert(

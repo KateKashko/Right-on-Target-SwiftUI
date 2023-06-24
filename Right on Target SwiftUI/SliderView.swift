@@ -14,6 +14,7 @@ struct SliderView: UIViewRepresentable {
 
     func makeUIView(context: Context) -> UISlider {
         let slider = UISlider()
+        slider.maximumValue = 0
         slider.maximumValue = 100
         slider.addTarget(
             context.coordinator,
@@ -41,6 +42,7 @@ struct SliderView: UIViewRepresentable {
 // MARK: - Coordinator
 extension SliderView {
     class Coordinator: NSObject {
+        
         @Binding var value: Double
 
         init(value: Binding<Double>) {
